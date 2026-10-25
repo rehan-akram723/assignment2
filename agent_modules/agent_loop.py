@@ -1,8 +1,8 @@
 import os
 import json
 import logging
-from typing import Dict, Any, List, Optional
-from tools import RepoTools, redact_secrets
+from typing import Any, Optional
+from tools import RepoTools
 from agent_modules.schema import AuditReport, Violation
 from agent_modules.llm import SYSTEM_PROMPT, TOOL_DEFINITIONS, create_llm_client
 from agent_modules.rules import RULES

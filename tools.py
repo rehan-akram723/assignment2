@@ -2,7 +2,7 @@ import os
 import re
 import subprocess
 from pathlib import Path
-from typing import List, Dict, Any, Optional
+from typing import Optional
 
 SECRET_PATTERNS = [
     re.compile(r"AKIA[0-9A-Z]{16}"),
