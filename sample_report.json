@@ -1,0 +1,65 @@
+{
+  "repository": "https://github.com/example/demo-service",
+  "violations": [
+    {
+      "rule_id": "SEC-001",
+      "category": "security",
+      "severity": "critical",
+      "file": "services/auth_service.py",
+      "line": 14,
+      "description": "Hardcoded API secret token exposed in source code",
+      "evidence": "API_SECRET = \"[REDACTED]\" assigned in authentication handler",
+      "recommendation": "Remove credential immediately and read from environment variables or a secrets manager."
+    },
+    {
+      "rule_id": "CI-001",
+      "category": "github_actions_ci",
+      "severity": "high",
+      "file": ".github/workflows/pr-check.yml",
+      "line": 12,
+      "description": "Dangerous pull_request_target trigger checking out pull request head",
+      "evidence": "Workflow uses pull_request_target trigger combined with actions/checkout for ref: ${{ github.event.pull_request.head.sha }}",
+      "recommendation": "Use pull_request trigger instead or avoid checking out untrusted PR head code."
+    },
+    {
+      "rule_id": "CI-002",
+      "category": "github_actions_ci",
+      "severity": "medium",
+      "file": ".github/workflows/deploy.yml",
+      "line": 8,
+      "description": "Overly broad workflow permissions",
+      "evidence": "Top-level permissions configured with permissions: write-all",
+      "recommendation": "Follow the principle of least privilege by specifying read-all or explicit fine-grained permissions per job."
+    },
+    {
+      "rule_id": "CONF-001",
+      "category": "configuration",
+      "severity": "high",
+      "file": "scripts/build_assets.py",
+      "line": 23,
+      "description": "Hardcoded developer absolute machine path",
+      "evidence": "OUTPUT_DIR = \"/Users/alex/projects/demo-service/dist\"",
+      "recommendation": "Replace machine-specific absolute path with relative paths or environment configuration."
+    },
+    {
+      "rule_id": "DEP-001",
+      "category": "dependency_management",
+      "severity": "medium",
+      "file": "Pipfile",
+      "line": null,
+      "description": "Missing dependency lockfile for reproducible builds",
+      "evidence": "Pipfile exists in repository root but Pipfile.lock is absent",
+      "recommendation": "Generate and commit Pipfile.lock to guarantee deterministic dependency resolution."
+    },
+    {
+      "rule_id": "TEST-002",
+      "category": "testing",
+      "severity": "medium",
+      "file": ".github/workflows/pr-check.yml",
+      "line": null,
+      "description": "Automated tests not executed in CI pull request pipeline",
+      "evidence": "PR workflow only runs linting without any pytest or unit test step",
+      "recommendation": "Add an automated test execution step in the CI pipeline before merging."
+    }
+  ]
+}
